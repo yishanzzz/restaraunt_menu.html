@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星际食堂 - Interstellar Canteen</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+                radial-gradient(2px 2px at 60px 70px, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1px 1px at 50px 50px, #fff, transparent),
+                radial-gradient(1px 1px at 20px 40px, rgba(255,255,255,0.6), transparent);
+            background-size: 200px 200px, 180px 180px, 150px 150px, 220px 220px;
+            background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+            color: #fff;
+            line-height: 1.6;
+            min-height: 100vh;
+            animation: twinkle 4s ease-in-out infinite;
+        }
+        
+        header {
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.9) 0%, rgba(75, 0, 130, 0.9) 100%);
+            padding: 20px 0;
+            box-shadow: 0 2px 20px rgba(138, 43, 226, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 3px solid #00ffff;
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+        
+        #header-img {
+            width: 100%;
+            max-width: 800px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
+            border: 3px solid #00ffff;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        h1 {
+            font-size: 3.5em;
+            background: linear-gradient(45deg, #00ffff, #ff00ff, #ffff00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+            font-weight: bold;
+            letter-spacing: 3px;
+        }
+        
+        .subtitle {
+            color: #00ffff;
+            font-size: 1.2em;
+            font-style: italic;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+        }
+        
+        nav {
+            margin-top: 20px;
+        }
+        
+        nav a {
+            display: inline-block;
+            margin: 0 15px;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #8a2be2, #4b0082);
+            color: #00ffff;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 1.1em;
+            transition: all 0.3s;
+            border: 2px solid #00ffff;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        }
+        
+        nav a:hover {
+            background: linear-gradient(135deg, #00ffff, #ff00ff);
+            color: #0a0e27;
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.8);
+        }
+        
+        main {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            background: rgba(10, 14, 39, 0.8);
+            padding: 40px;
+            margin-bottom: 30px;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(138, 43, 226, 0.5);
+            border: 2px solid #00ffff;
+        }
+        
+        h2 {
+            font-size: 2.8em;
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 3px solid #00ffff;
+            padding-bottom: 15px;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+        }
+        
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        article {
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.3), rgba(75, 0, 130, 0.3));
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            transition: all 0.3s;
+            border: 2px solid rgba(0, 255, 255, 0.5);
+        }
+        
+        article:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
+            border-color: #00ffff;
+        }
+        
+        article img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border: 2px solid #00ffff;
+            filter: brightness(1.1) saturate(1.2);
+        }
+        
+        article h3 {
+            font-size: 1.6em;
+            color: #00ffff;
+            margin-bottom: 12px;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+        }
+        
+        article p {
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+        
+        article p i {
+            color: #ff00ff;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255, 0, 255, 0.8);
+        }
+        
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #00ffff;
+            font-size: 1.1em;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+        }
+        
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #00ffff;
+            border-radius: 8px;
+            font-size: 1em;
+            background: rgba(10, 14, 39, 0.8);
+            color: #fff;
+        }
+        
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #ff00ff;
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+            background: rgba(10, 14, 39, 0.95);
+        }
+        
+        .radio-group, .checkbox-group {
+            margin: 15px 0;
+            padding: 10px;
+            background: rgba(138, 43, 226, 0.2);
+            border-radius: 8px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+        
+        .radio-group label, .checkbox-group label {
+            display: inline-block;
+            margin-left: 8px;
+            font-weight: normal;
+            color: #e0e0e0;
+        }
+        
+        input[type="radio"], input[type="checkbox"] {
+            margin-right: 8px;
+            accent-color: #00ffff;
+            transform: scale(1.2);
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #00ffff;
+            border-radius: 8px;
+            font-size: 1em;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 120px;
+            background: rgba(10, 14, 39, 0.8);
+            color: #fff;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: #ff00ff;
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+            background: rgba(10, 14, 39, 0.95);
+        }
+        
+        textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        input[type="submit"] {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #00ffff, #ff00ff);
+            color: #0a0e27;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.3em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        input[type="submit"]:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 1);
+            background: linear-gradient(135deg, #ff00ff, #00ffff);
+        }
+        
+        footer {
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.9), rgba(75, 0, 130, 0.9));
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 40px;
+            border-top: 3px solid #00ffff;
+            box-shadow: 0 -2px 20px rgba(138, 43, 226, 0.5);
+        }
+        
+        footer p {
+            font-size: 1.2em;
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <img id="header-img" src="https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=800&h=300&fit=crop" alt="Interstellar Canteen - Space Restaurant">
+            <h1>星际食堂</h1>
+            <p class="subtitle">Interstellar Canteen - Alien Food for Space Travelers</p>
+            <nav>
+                <a href="#menu">Menu</a>
+                <a href="#order-form">Order Form</a>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <section id="menu">
+            <h2>Menu</h2>
+            <div class="menu-items">
+                <article>
+                    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&h=300&fit=crop" alt="Nebula Noodles">
+                    <h3>Nebula Noodles</h3>
+                    <p>Glowing cosmic pasta harvested from the rings of Saturn, infused with stardust and served with meteorite mushrooms. <i>Price: 50 Galactic Credits</i></p>
+                </article>
+                
+                <article>
+                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop" alt="Quantum Quasar Quiche">
+                    <h3>Quantum Quasar Quiche</h3>
+                    <p>A multi-dimensional egg dish that exists in three states simultaneously, filled with alien vegetables from Alpha Centauri. <i>Price: 65 Galactic Credits</i></p>
+                </article>
+                
+                <article>
+                    <img src="https://images.unsplash.com/photo-1558030006-450675393462?w=400&h=300&fit=crop" alt="Plasma Planet Steak">
+                    <h3>Plasma Planet Steak</h3>
+                    <p>Mysterious meat from an undiscovered planet, cooked at absolute zero and served with gravity-defying mashed potatoes. <i>Price: 80 Galactic Credits</i></p>
+                </article>
+            </div>
+        </section>
+        
+        <section id="order-form">
+            <h2>Place Your Order</h2>
+            <form>
+                <div class="form-group">
+                    <label for="nebula-noodles-qty">Nebula Noodles Quantity:</label>
+                    <input type="number" id="nebula-noodles-qty" name="nebula-noodles-qty" min="0" value="0">
+                </div>
+                
+                <div class="form-group">
+                    <label for="quasar-quiche-qty">Quantum Quasar Quiche Quantity:</label>
+                    <input type="number" id="quasar-quiche-qty" name="quasar-quiche-qty" min="0" value="0">
+                </div>
+                
+                <div class="form-group">
+                    <label for="plasma-steak-qty">Plasma Planet Steak Quantity:</label>
+                    <input type="number" id="plasma-steak-qty" name="plasma-steak-qty" min="0" value="0">
+                </div>
+                
+                <div class="form-group">
+                    <label>Choose Your Side Dimension:</label>
+                    <div class="radio-group">
+                        <input type="radio" id="side-asteroid" name="side" value="asteroid-chips">
+                        <label for="side-asteroid">Asteroid Chips (from the Kuiper Belt)</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="side-moon" name="side" value="moon-rice">
+                        <label for="side-moon">Moon Rice (harvested from lunar farms)</label>
+                    </div>
+                    <div class="radio-group">
+                        <input type="radio" id="side-comet" name="side" value="comet-fries">
+                        <label for="side-comet">Comet Fries (with cosmic seasoning)</label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Space Add-ons (Select all that apply):</label>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="addon-stardust" name="addons" value="stardust-bread">
+                        <label for="addon-stardust">Stardust Bread (+10 Credits)</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="addon-alien" name="addons" value="alien-salad">
+                        <label for="addon-alien">Alien Green Salad (+15 Credits)</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="addon-blackhole" name="addons" value="blackhole-soup">
+                        <label for="addon-blackhole">Black Hole Soup (+12 Credits)</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="addon-nebula" name="addons" value="nebula-dessert">
+                        <label for="addon-nebula">Nebula Dessert (+20 Credits)</label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="special-requests">Special Requests or Species-Specific Dietary Needs:</label>
+                    <textarea id="special-requests" name="special-requests" placeholder="Please specify your home planet, species type, any allergies to Earth foods, or special preparation requests (e.g., temperature preferences, atmospheric conditions needed)..."></textarea>
+                </div>
+                
+                <input type="submit" value="Go To Checkout">
+            </form>
+        </section>
+    </main>
+    
+    <footer>
+        <p>Made with love by madsi003</p>
+    </footer>
+</body>
+</html>
